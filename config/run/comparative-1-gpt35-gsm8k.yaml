@@ -1,0 +1,32 @@
+# Run configuration for baseline CoT method
+run_id: comparative-1-gpt35-gsm8k
+
+method:
+  type: baseline_cot
+  name: "Baseline Chain-of-Thought"
+  
+  # Single-pass CoT configuration
+  prompt_template: |
+    Let's solve this math problem step by step.
+    
+    Problem: {question}
+    
+    Let's think step by step:
+    [Your reasoning here]
+    
+    Final: [numeric answer only]
+  max_tokens: 256
+
+model:
+  name: gpt-3.5-turbo
+  provider: openai
+
+dataset:
+  name: gsm8k
+  split: test
+  max_samples: 200  # First 200 for main mode
+  
+inference:
+  batch_size: 1
+  num_workers: 1
+  cache_dir: .cache
